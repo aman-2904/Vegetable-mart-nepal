@@ -166,7 +166,6 @@ export default function OrderDetailsClient({ order }: { order: any }) {
                 <User className="w-4 h-4 text-gray-400" />
                 <div>
                   <div className="text-sm font-medium text-gray-900">{order.profile.full_name}</div>
-                  <div className="text-xs text-gray-500">{order.profile.email}</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">

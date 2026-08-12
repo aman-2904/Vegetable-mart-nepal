@@ -204,7 +204,7 @@ export async function getAdminOrderDetailsAction(orderNumber: string) {
 
   const { data } = await supabase
     .from("orders")
-    .select("*, profile:profiles(full_name, phone, email), addresses(*), order_items(*), payments(*)")
+    .select("*, profile:profiles(full_name, phone), addresses(*), order_items(*), payments(*)")
     .eq("order_number", orderNumber)
     .single();
 
