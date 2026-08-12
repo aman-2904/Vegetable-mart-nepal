@@ -224,11 +224,12 @@ export default function CartPage() {
                 </div>
               </div>
               
-              <button 
+              <Link 
+                href="/checkout"
                 className="w-full h-14 rounded-full bg-green-600 text-white font-bold text-lg shadow-lg shadow-green-200 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
               >
                 Proceed to Checkout <ArrowLeft className="w-5 h-5 rotate-180" />
-              </button>
+              </Link>
             </div>
           </div>
           
