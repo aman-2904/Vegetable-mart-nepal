@@ -183,15 +183,28 @@ export default function CheckoutClient({ initialAddresses, storeSettings, delive
             {storeSettings.qr_enabled !== false && (
               <div 
                 onClick={() => setPaymentMethod('qr')}
-                className={`cursor-pointer p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'qr' ? 'border-green-600 bg-green-50/30' : 'border-gray-100 hover:border-gray-300'}`}
+                className={`cursor-pointer p-4 rounded-xl border-2 transition-all flex flex-col gap-4 ${paymentMethod === 'qr' ? 'border-green-600 bg-green-50/30' : 'border-gray-100 hover:border-gray-300'}`}
               >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'qr' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'}`}>
-                  <QrCode className="w-6 h-6" />
+                <div className="flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'qr' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <QrCode className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">UPI / QR Code</h3>
+                    <p className="text-sm text-gray-500">Pay securely via any UPI app</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-gray-900">UPI / QR Code</h3>
-                  <p className="text-sm text-gray-500">Pay securely via any UPI app</p>
-                </div>
+                
+                {paymentMethod === 'qr' && storeSettings.qr_code_url && (
+                  <div className="mt-2 flex flex-col items-center p-4 bg-white rounded-xl border border-gray-100 shadow-sm animate-in fade-in slide-in-from-top-2">
+                    <img 
+                      src={storeSettings.qr_code_url} 
+                      alt="Merchant UPI QR Code" 
+                      className="w-48 h-48 object-contain rounded-lg border border-gray-100 p-2"
+                    />
+                    <p className="text-xs text-center text-gray-500 mt-3 font-medium">Scan with any UPI app to pay<br/>₹{finalTotal.toFixed(2)}</p>
+                  </div>
+                )}
               </div>
             )}
 
