@@ -24,6 +24,8 @@ export interface GetProductsOptions {
   searchQuery?: string;
   isFeatured?: boolean;
   sortBy?: 'popular' | 'price_asc' | 'price_desc' | 'newest';
+  minPrice?: number;
+  maxPrice?: number;
   limit?: number;
   page?: number;
 }
@@ -42,6 +44,14 @@ export async function getProducts(options: GetProductsOptions = {}): Promise<{ p
 
   if (options.isFeatured !== undefined) {
     query = query.eq("is_featured", options.isFeatured);
+  }
+
+  if (options.minPrice !== undefined) {
+    query = query.gte("price", options.minPrice);
+  }
+
+  if (options.maxPrice !== undefined) {
+    query = query.lte("price", options.maxPrice);
   }
 
   // Sorting
