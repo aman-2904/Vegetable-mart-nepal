@@ -100,7 +100,7 @@ export function Navbar() {
                 </span>
               )}
             </div>
-            <span className="text-sm font-bold text-gray-900">${totalPrice.toFixed(2)} USD</span>
+            <span className="text-sm font-bold text-gray-900">रु{totalPrice.toFixed(2)}</span>
           </Link>
         </div>
 

@@ -84,11 +84,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <div className="flex items-baseline gap-3">
                 {hasDiscount ? (
                   <>
-                    <span className="text-3xl font-extrabold text-gray-900">₹{product.discount_price}</span>
-                    <span className="text-xl text-gray-400 line-through">₹{product.price}</span>
+                    <span className="text-3xl font-extrabold text-gray-900">रु{product.discount_price}</span>
+                    <span className="text-xl text-gray-400 line-through">रु{product.price}</span>
                   </>
                 ) : (
-                  <span className="text-3xl font-extrabold text-gray-900">₹{product.price}</span>
+                  <span className="text-3xl font-extrabold text-gray-900">रु{product.price}</span>
                 )}
               </div>
               <span className="text-gray-500">/ {product.unit}</span>

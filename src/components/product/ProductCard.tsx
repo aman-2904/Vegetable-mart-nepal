@@ -61,8 +61,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Price Row */}
         <div className="flex items-center justify-between mt-1 mb-3">
           <div className="flex items-baseline gap-1">
-            <span className="text-sm font-extrabold text-gray-900">${priceToDisplay.toFixed(2)}</span>
-            <span className="text-[10px] font-medium text-gray-500">USD</span>
+            <span className="text-sm font-extrabold text-gray-900">रु{priceToDisplay.toFixed(2)}</span>
           </div>
           <span className="text-[10px] text-gray-400">
             {product.unit === 'KG' ? '1000 gt' : (product.unit === 'GRAM' ? '100 gt' : '1 pc')}

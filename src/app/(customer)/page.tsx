@@ -155,47 +155,7 @@ export default function HomePage() {
         </div>
       </section>
       
-      {/* Blog Section (Mock) */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8 px-2">
-            <h2 className="text-2xl font-extrabold text-gray-900">New on the Blog</h2>
-            <Link href="#" className="text-sm font-bold text-green-700 hover:underline">See all</Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex gap-4 p-4 rounded-xl border border-gray-100 bg-[#faf9f8] shadow-sm">
-              <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=150" className="w-20 h-20 rounded-lg object-cover" alt="Blog" />
-              <div>
-                <h4 className="font-bold text-gray-900 text-sm mb-1 leading-tight">From Farm to Table: Meeting Our Growers</h4>
-                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-700 mt-2">
-                  <span className="text-[10px]">🥕</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex gap-4 p-4 rounded-xl border border-gray-100 bg-[#faf9f8] shadow-sm">
-              <img src="https://images.unsplash.com/photo-1590868309235-ea34bed7bd7f?q=80&w=150" className="w-20 h-20 rounded-lg object-cover" alt="Blog" />
-              <div>
-                <h4 className="font-bold text-gray-900 text-sm mb-1 leading-tight">Meeting Our Table</h4>
-                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-700 mt-2">
-                  <span className="text-[10px]">🌱</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex gap-4 p-4 rounded-xl border border-gray-100 bg-[#faf9f8] shadow-sm">
-              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=150" className="w-20 h-20 rounded-lg object-cover" alt="Blog" />
-              <div>
-                <h4 className="font-bold text-gray-900 text-sm mb-1 leading-tight">Spring Salads: Fresh Recipes</h4>
-                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-700 mt-2">
-                  <span className="text-[10px]">🥬</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
     </div>
   );
