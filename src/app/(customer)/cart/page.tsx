@@ -76,12 +76,12 @@ export default function CartPage() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
         
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Shopping Cart</h1>
             <p className="text-gray-500 mt-2">{totalItems} items in your cart</p>
           </div>
-          <Link href="/shop" className="text-green-600 hover:text-green-700 font-medium flex items-center text-sm">
+          <Link href="/shop" className="text-green-700 hover:text-green-800 font-bold flex items-center text-sm bg-green-50 hover:bg-green-100 px-5 py-2.5 rounded-full transition-colors self-start sm:self-auto">
             <ArrowLeft className="w-4 h-4 mr-2" /> Continue Shopping
           </Link>
         </div>
@@ -90,14 +90,6 @@ export default function CartPage() {
           
           {/* Cart Items List */}
           <div className="flex-1 space-y-4">
-            {/* Header row for desktop */}
-            <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-3 bg-white rounded-xl border border-gray-100 text-sm font-medium text-gray-500 uppercase tracking-wider">
-              <div className="col-span-6">Product</div>
-              <div className="col-span-3 text-center">Quantity</div>
-              <div className="col-span-2 text-right">Total</div>
-              <div className="col-span-1 text-right"></div>
-            </div>
-
             {items.map((item) => {
               const product = item.product;
               const hasDiscount = !!product.discount_price && product.discount_price < product.price;
@@ -107,79 +99,102 @@ export default function CartPage() {
               const imageUrl = product.image_url || '/images/placeholder.svg';
 
               return (
-                <div key={product.id} className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm relative">
+                <div key={product.id} className="flex gap-4 sm:gap-6 p-4 sm:p-6 bg-white rounded-2xl border border-gray-100 shadow-sm relative">
                   
-                  {/* Product Info */}
-                  <div className="col-span-1 md:col-span-6 flex items-center gap-4">
-                    <Link href={`/products/${product.slug}`} className="w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden bg-gray-50 flex-shrink-0">
-                      <img src={imageUrl} alt={product.name} className="w-full h-full object-cover" />
-                    </Link>
-                    <div className="flex flex-col">
-                      <Link href={`/products/${product.slug}`} className="font-semibold text-gray-900 hover:text-green-600 transition-colors text-base md:text-lg">
-                        {product.name}
-                      </Link>
-                      <span className="text-sm text-gray-500 mb-1">{product.unit}</span>
+                  {/* Product Image */}
+                  <Link href={`/products/${product.slug}`} className="w-20 h-20 sm:w-32 sm:h-32 rounded-xl overflow-hidden bg-gray-50 flex-shrink-0 border border-gray-100">
+                    <img src={imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                  </Link>
+                  
+                  {/* Product Info & Controls */}
+                  <div className="flex flex-col flex-1 justify-between py-0.5">
+                    <div className="flex justify-between items-start">
+                      <div className="pr-8">
+                        <Link href={`/products/${product.slug}`} className="font-bold text-gray-900 hover:text-green-600 transition-colors text-base sm:text-lg line-clamp-1">
+                          {product.name}
+                        </Link>
+                        <span className="text-xs sm:text-sm font-medium text-gray-500 block mt-0.5 sm:mt-1">{product.unit}</span>
+                      </div>
                       
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-bold text-gray-900">₹{currentPrice}</span>
-                        {hasDiscount && (
-                          <span className="text-sm text-gray-400 line-through">₹{product.price}</span>
+                      {/* Remove Button */}
+                      <div className="absolute top-3 right-3 sm:relative sm:top-0 sm:right-0">
+                        {confirmRemoveId === product.id ? (
+                          <div className="flex flex-col items-end gap-2 bg-white shadow-lg p-3 rounded-lg border border-gray-100 z-20 absolute right-0 top-0">
+                            <span className="text-xs font-bold text-gray-500 whitespace-nowrap">Remove item?</span>
+                            <div className="flex gap-2">
+                              <button onClick={() => handleRemove(product.id, product.name)} className="text-xs font-bold text-white bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded-md transition-colors">Yes</button>
+                              <button onClick={() => setConfirmRemoveId(null)} className="text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-md transition-colors">No</button>
+                            </div>
+                          </div>
+                        ) : (
+                          <button 
+                            onClick={() => setConfirmRemoveId(product.id)}
+                            className="p-2 -m-2 text-gray-400 hover:text-red-500 transition-colors"
+                            title="Remove item"
+                          >
+                            <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                          </button>
                         )}
                       </div>
                     </div>
-                  </div>
-
-                  {/* Quantity Controls */}
-                  <div className="col-span-1 md:col-span-3 flex justify-between md:justify-center items-center mt-4 md:mt-0">
-                    <span className="md:hidden text-sm text-gray-500">Quantity</span>
-                    <div className="flex items-center border border-gray-200 rounded-lg h-10 w-28 bg-white">
-                      <button 
-                        onClick={() => updateQuantity(product.id, item.quantity - 1)}
-                        className="w-8 h-full flex items-center justify-center text-gray-500 hover:text-green-600 transition-colors"
-                      >
-                        -
-                      </button>
-                      <span className="flex-1 text-center font-medium text-gray-900 text-sm">
-                        {item.quantity}
-                      </span>
-                      <button 
-                        onClick={() => {
-                          if (item.quantity >= product.stock) {
-                            addToast(`Only ${product.stock} available in stock`, "error");
-                          } else {
-                            updateQuantity(product.id, item.quantity + 1);
-                          }
-                        }}
-                        className={`w-8 h-full flex items-center justify-center text-gray-500 hover:text-green-600 transition-colors ${item.quantity >= product.stock ? 'opacity-50 cursor-not-allowed' : ''}`}
-                        disabled={item.quantity >= product.stock}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Total Price */}
-                  <div className="col-span-1 md:col-span-2 flex justify-between md:justify-end items-center mt-2 md:mt-0">
-                    <span className="md:hidden text-sm text-gray-500">Total</span>
-                    <span className="font-bold text-gray-900">₹{itemTotal.toFixed(2)}</span>
-                  </div>
-
-                  {/* Remove Button */}
-                  <div className="col-span-1 md:col-span-1 flex justify-end md:justify-end absolute top-4 right-4 md:relative md:top-0 md:right-0">
-                    {confirmRemoveId === product.id ? (
-                      <div className="flex items-center gap-2">
-                        <button onClick={() => handleRemove(product.id, product.name)} className="text-xs text-white bg-red-600 px-2 py-1 rounded">Yes</button>
-                        <button onClick={() => setConfirmRemoveId(null)} className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">No</button>
+                    
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between mt-3 sm:mt-6 gap-3 sm:gap-4">
+                      {/* Price Details */}
+                      <div className="flex items-center justify-between sm:flex-col sm:items-start w-full sm:w-auto">
+                        <div className="flex flex-col">
+                          <span className="text-[10px] sm:text-xs font-medium text-gray-400 uppercase tracking-wider mb-0.5 sm:mb-1">Price</span>
+                          <div className="flex items-baseline gap-1.5 sm:gap-2">
+                            <span className="font-extrabold text-gray-900 text-base sm:text-xl">₹{currentPrice}</span>
+                            {hasDiscount && (
+                              <span className="text-xs sm:text-sm font-medium text-gray-400 line-through">₹{product.price}</span>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Mobile Total Price */}
+                        <div className="flex flex-col items-end sm:hidden">
+                          <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-0.5">Total</span>
+                          <span className="font-extrabold text-green-700 text-base">₹{itemTotal.toFixed(2)}</span>
+                        </div>
                       </div>
-                    ) : (
-                      <button 
-                        onClick={() => setConfirmRemoveId(product.id)}
-                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
-                        title="Remove item"
-                      >
-                        <Trash2 className="w-5 h-5" />
-                      </button>
-                    )}
+                      
+                      <div className="flex items-center justify-start sm:justify-end gap-4 sm:gap-8 w-full sm:w-auto">
+                        {/* Quantity */}
+                        <div className="flex flex-col items-start sm:items-center">
+                          <span className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1 hidden sm:block">Qty</span>
+                          <div className="flex items-center border border-gray-200 rounded-lg h-8 sm:h-10 w-24 sm:w-28 bg-gray-50">
+                            <button 
+                              onClick={() => updateQuantity(product.id, item.quantity - 1)}
+                              className="w-8 h-full flex items-center justify-center text-gray-600 hover:text-green-700 hover:bg-gray-100 transition-colors rounded-l-lg font-medium"
+                            >
+                              -
+                            </button>
+                            <span className="flex-1 text-center font-bold text-gray-900 text-sm bg-white h-full flex items-center justify-center border-x border-gray-200">
+                              {item.quantity}
+                            </span>
+                            <button 
+                              onClick={() => {
+                                if (item.quantity >= product.stock) {
+                                  addToast(`Only ${product.stock} available in stock`, "error");
+                                } else {
+                                  updateQuantity(product.id, item.quantity + 1);
+                                }
+                              }}
+                              className={`w-8 h-full flex items-center justify-center text-gray-600 hover:text-green-700 hover:bg-gray-100 transition-colors rounded-r-lg font-medium ${item.quantity >= product.stock ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''}`}
+                              disabled={item.quantity >= product.stock}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Desktop Total Price */}
+                        <div className="hidden sm:flex flex-col items-end">
+                          <span className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Total</span>
+                          <span className="font-extrabold text-green-700 text-xl">₹{itemTotal.toFixed(2)}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
