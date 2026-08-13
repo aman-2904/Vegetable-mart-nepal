@@ -70,52 +70,56 @@ export default function OrderTracker({ orderId, initialStatus }: OrderTrackerPro
   const activeIndex = currentIndex >= 0 ? currentIndex : 0;
 
   return (
-    <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm relative overflow-hidden">
-      <h3 className="font-bold text-gray-900 mb-8 text-lg">Live Order Tracking</h3>
-      
-      <div className="relative">
-        {/* Progress Bar Background */}
-        <div className="absolute top-6 left-6 right-6 h-1 bg-gray-100 rounded-full" />
+    <div className="bg-white rounded-2xl p-5 sm:p-8 border border-gray-100 shadow-sm relative">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <h3 className="font-bold text-gray-900 text-lg">Live Order Tracking</h3>
         
-        {/* Progress Bar Fill */}
-        <div 
-          className="absolute top-6 left-6 h-1 bg-green-500 rounded-full transition-all duration-1000 ease-out"
-          style={{ width: `calc(${activeIndex * (100 / (STATUS_STAGES.length - 1))}% - 1.5rem)` }}
-        />
-
-        {/* Stages */}
-        <div className="relative flex justify-between">
-          {STATUS_STAGES.map((stage, idx) => {
-            const isCompleted = idx <= activeIndex;
-            const isCurrent = idx === activeIndex;
-            const Icon = stage.icon;
-            
-            return (
-              <div key={stage.id} className="flex flex-col items-center relative z-10 w-24">
-                <div 
-                  className={`w-12 h-12 rounded-full flex items-center justify-center border-4 transition-all duration-500 delay-100 bg-white
-                    ${isCompleted ? 'border-green-500 text-green-500' : 'border-gray-100 text-gray-300'}
-                    ${isCurrent ? 'ring-4 ring-green-100 scale-110' : ''}
-                  `}
-                >
-                  <Icon className={`w-5 h-5 ${isCurrent && stage.id === 'preparing' ? 'animate-spin' : ''}`} />
-                </div>
-                <span className={`text-xs font-medium mt-3 text-center transition-colors duration-300 ${isCompleted ? 'text-gray-900' : 'text-gray-400'}`}>
-                  {stage.label}
-                </span>
-              </div>
-            );
-          })}
+        {/* Realtime Pulse indicator */}
+        <div className="flex items-center self-start sm:self-auto gap-2 text-xs font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          Live Updates
         </div>
       </div>
       
-      {/* Realtime Pulse indicator */}
-      <div className="absolute top-8 right-8 flex items-center gap-2 text-xs font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-        </span>
-        Live Updates
+      <div className="overflow-x-auto pb-4 -mx-5 px-5 sm:mx-0 sm:px-0">
+        <div className="min-w-[500px] relative">
+          {/* Progress Bar Background */}
+          <div className="absolute top-6 left-6 right-6 h-1 bg-gray-100 rounded-full" />
+          
+          {/* Progress Bar Fill */}
+          <div 
+            className="absolute top-6 left-6 h-1 bg-green-500 rounded-full transition-all duration-1000 ease-out"
+            style={{ width: `calc(${activeIndex * (100 / (STATUS_STAGES.length - 1))}% - 3rem)` }}
+          />
+
+          {/* Stages */}
+          <div className="relative flex justify-between">
+            {STATUS_STAGES.map((stage, idx) => {
+              const isCompleted = idx <= activeIndex;
+              const isCurrent = idx === activeIndex;
+              const Icon = stage.icon;
+              
+              return (
+                <div key={stage.id} className="flex flex-col items-center relative z-10 w-24">
+                  <div 
+                    className={`w-12 h-12 rounded-full flex items-center justify-center border-4 transition-all duration-500 delay-100 bg-white
+                      ${isCompleted ? 'border-green-500 text-green-500' : 'border-gray-100 text-gray-300'}
+                      ${isCurrent ? 'ring-4 ring-green-100 scale-110' : ''}
+                    `}
+                  >
+                    <Icon className={`w-5 h-5 ${isCurrent && stage.id === 'preparing' ? 'animate-spin' : ''}`} />
+                  </div>
+                  <span className={`text-xs font-medium mt-3 text-center transition-colors duration-300 ${isCompleted ? 'text-gray-900' : 'text-gray-400'}`}>
+                    {stage.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
