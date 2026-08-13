@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ChevronRight, ChevronDown } from "lucide-react";
 
-export const dynamic = "force-dynamic";
+
 
 interface ShopPageProps {
   searchParams: { [key: string]: string | string[] | undefined };

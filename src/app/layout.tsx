@@ -20,13 +20,6 @@ export const metadata: Metadata = {
     description: "Order farm-fresh, premium quality vegetables delivered straight to your door.",
     url: "/",
     siteName: "FreshHarvest",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-      },
-    ],
     locale: "en_US",
     type: "website",
   },

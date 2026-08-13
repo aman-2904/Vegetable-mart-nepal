@@ -1,4 +1,5 @@
 import { getProductBySlug, getRelatedProducts } from "@/lib/services/product.service";
+import Image from "next/image";
 import { ProductCard } from "@/components/product/ProductCard";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -33,7 +34,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   const relatedProducts = await getRelatedProducts(product.category_id, product.id, 4);
-  const imageUrl = product.image_url || `https://source.unsplash.com/800x600/?vegetable,${product.categories?.name || 'fresh'}`;
+  const imageUrl = product.image_url || '/images/placeholder.svg';
   const isOutOfStock = product.stock <= 0;
   const hasDiscount = product.discount_price && product.discount_price < product.price;
 
@@ -65,10 +66,13 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   SALE
                 </div>
               )}
-              <img 
+              <Image 
                 src={imageUrl} 
                 alt={product.name}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+                className="object-cover"
               />
             </div>
           </div>

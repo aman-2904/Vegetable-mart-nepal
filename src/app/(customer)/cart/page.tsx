@@ -94,7 +94,7 @@ export default function CartPage() {
               const currentPrice = product.discount_price || product.price;
               const itemTotal = currentPrice * item.quantity;
               
-              const imageUrl = product.image_url || `https://source.unsplash.com/400x300/?vegetable,${product.categories?.name || 'fresh'}`;
+              const imageUrl = product.image_url || '/images/placeholder.svg';
 
               return (
                 <div key={product.id} className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm relative">

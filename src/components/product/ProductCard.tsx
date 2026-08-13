@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Product } from "@/lib/services/product.service";
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/components/ui/Toaster";
@@ -18,7 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const priceToDisplay = product.discount_price || product.price;
 
   // Use a generic placeholder based on the category name if no image URL exists
-  const imageUrl = product.image_url || `https://source.unsplash.com/400x300/?vegetable,${product.categories?.name || 'fresh'}`;
+  const imageUrl = product.image_url || '/images/placeholder.svg';
 
   // Fake tags for visual purposes matching the mockup
   const isOrganic = product.name.toLowerCase().includes('organic');
@@ -43,10 +44,12 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        <img 
+        <Image 
           src={imageUrl} 
           alt={product.name}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </Link>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getProducts } from "@/lib/services/product.service";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Suspense } from "react";
@@ -53,10 +54,13 @@ export default function HomePage() {
           
           <div className="flex-1 w-full relative">
             <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-lg border-4 border-white">
-              <img 
+              <Image 
                 src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800&auto=format&fit=crop" 
                 alt="Wooden crate of fresh vegetables"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+                className="object-cover"
               />
             </div>
           </div>
@@ -73,7 +77,7 @@ export default function HomePage() {
               <Link key={cat.name} href={`/shop?q=${cat.name}`} className="flex flex-col items-center gap-3 group">
                 <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border border-gray-200 shadow-sm bg-[#eef1e6] flex items-center justify-center relative p-2 transition-transform group-hover:scale-105">
                   <div className="absolute inset-0 bg-[#eef1e6] rounded-full z-0 opacity-50"></div>
-                  <img src={cat.img} alt={cat.name} className="w-full h-full rounded-full object-cover relative z-10 shadow-inner" />
+                  <Image src={cat.img} alt={cat.name} fill sizes="112px" className="rounded-full object-cover relative z-10 shadow-inner" />
                 </div>
                 <span className="text-sm font-bold text-gray-900 group-hover:text-green-700">{cat.name}</span>
               </Link>
@@ -82,16 +86,16 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 px-2">
             <Link href="/shop" className="relative h-48 rounded-2xl overflow-hidden group">
-              <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Organic" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 text-white">
+              <Image src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=800&auto=format&fit=crop" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" alt="Organic" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+              <div className="absolute bottom-6 left-6 text-white z-20">
                 <span className="text-2xl font-bold">Organic Harvest Resources</span>
               </div>
             </Link>
             <Link href="/shop" className="relative h-48 rounded-2xl overflow-hidden group">
-              <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?q=80&w=800&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Local" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 text-white">
+              <Image src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?q=80&w=800&auto=format&fit=crop" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" alt="Local" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+              <div className="absolute bottom-6 left-6 text-white z-20">
                 <span className="text-2xl font-bold">Local Farm Direct</span>
               </div>
             </Link>

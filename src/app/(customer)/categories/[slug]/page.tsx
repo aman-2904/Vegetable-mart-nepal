@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Suspense } from "react";
 
-export const dynamic = "force-dynamic";
+
 
 interface CategoryPageProps {
   params: { slug: string };

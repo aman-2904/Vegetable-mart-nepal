@@ -5,7 +5,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Search } from "lucide-react";
 import { Suspense } from "react";
 
-export const dynamic = "force-dynamic";
+
 
 interface SearchPageProps {
   searchParams: { [key: string]: string | string[] | undefined };
