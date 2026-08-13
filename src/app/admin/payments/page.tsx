@@ -121,7 +121,7 @@ export default function AdminPaymentsPage() {
                       {/* Actions based on method and status */}
                       
                       {/* QR: submitted -> verify / reject */}
-                      {payment.payment_method === 'qr' && payment.status === 'submitted' && (
+                      {payment.payment_method === 'qr' && ['submitted', 'pending'].includes(payment.status) && (
                         <div className="flex justify-end gap-2">
                           <button onClick={() => handleStatusUpdate(payment.id, 'verified', payment.order_id)} className="flex items-center gap-1 px-3 py-1.5 bg-green-50 text-green-700 hover:bg-green-100 rounded-lg text-xs font-bold border border-green-200 transition-colors">
                             <CheckCircle2 className="w-4 h-4" /> Verify
@@ -146,13 +146,6 @@ export default function AdminPaymentsPage() {
                         <div className="text-xs text-gray-500">
                           {payment.status === 'rejected' ? 'Rejected' : 'Verified'} by <span className="font-bold">{payment.verified_by_profile.full_name}</span>
                           <div className="text-[10px] mt-0.5">{new Date(payment.verified_at).toLocaleDateString()}</div>
-                        </div>
-                      )}
-
-                      {/* QR: pending -> waiting for customer to scan and submit */}
-                      {payment.payment_method === 'qr' && payment.status === 'pending' && (
-                        <div className="flex items-center justify-end gap-1 text-xs font-medium text-gray-400">
-                          <AlertTriangle className="w-3.5 h-3.5" /> Waiting for customer
                         </div>
                       )}
                     </td>
