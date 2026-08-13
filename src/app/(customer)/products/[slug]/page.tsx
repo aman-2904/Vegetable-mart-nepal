@@ -134,7 +134,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         {relatedProducts.length > 0 && (
           <div className="border-t border-gray-100 pt-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Related Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {relatedProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

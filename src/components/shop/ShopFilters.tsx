@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronDown, Check } from "lucide-react";
+import { ChevronDown, Check, Filter } from "lucide-react";
 import { Category } from "@/lib/services/category.service";
 
 interface ShopFiltersProps {
@@ -23,6 +23,7 @@ export function ShopFilters({ categories }: ShopFiltersProps) {
 
   const [minPrice, setMinPrice] = useState(initialMinPrice);
   const [maxPrice, setMaxPrice] = useState(initialMaxPrice);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setMinPrice(searchParams.get("minPrice") || "");
@@ -71,7 +72,19 @@ export function ShopFilters({ categories }: ShopFiltersProps) {
 
   return (
     <aside className="w-full lg:w-60 flex-shrink-0">
-      <div className="sticky top-24 space-y-8">
+      <div className="lg:hidden mb-6">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full py-3 px-4 bg-white border border-gray-200 rounded-lg flex items-center justify-between font-bold text-gray-900 shadow-sm"
+        >
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4" /> Filters
+          </div>
+          <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
+
+      <div className={`sticky top-24 space-y-8 ${isOpen ? 'block' : 'hidden'} lg:block`}>
         
         {/* Category Filter */}
         <div>

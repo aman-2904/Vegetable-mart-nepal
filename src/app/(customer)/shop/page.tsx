@@ -45,7 +45,7 @@ async function ShopContent({ searchParams }: { searchParams: { [key: string]: st
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       {displayProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
@@ -69,21 +69,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           <span className="text-gray-900">Shop All</span>
         </div>
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-gray-200">
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Filters</h1>
-          
-          <div className="flex items-center gap-4 mt-4 md:mt-0">
-            <span className="text-sm font-bold text-gray-700">Sort by</span>
-            <select 
-              className="bg-white border border-gray-200 text-gray-700 text-sm rounded-md focus:ring-green-500 focus:border-green-500 block px-3 py-1.5 font-medium"
-              defaultValue={currentSort || "Relevance"}
-            >
-              <option value="Relevance">Relevance</option>
-              <option value="Price">Price</option>
-              <option value="Alphabetical">Alphabetical</option>
-            </select>
-          </div>
-        </div>
+
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
