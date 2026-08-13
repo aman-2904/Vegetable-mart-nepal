@@ -4,17 +4,27 @@ import Link from "next/link";
 import { ArrowLeft, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/components/ui/Toaster";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const DELIVERY_FEE = 40;
 const FREE_DELIVERY_THRESHOLD = 500;
 
 export default function CartPage() {
-  const { items, updateQuantity, removeItem, clearCart, totalPrice, totalItems } = useCart();
+  const { items, updateQuantity, removeItem, clearCart } = useCart();
   const addToast = useToast(state => state.addToast);
   
-  // Local state for tracking which item is being removed for a potential confirmation modal
+  const [mounted, setMounted] = useState(false);
   const [confirmRemoveId, setConfirmRemoveId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
 
   if (items.length === 0) {
     return (
