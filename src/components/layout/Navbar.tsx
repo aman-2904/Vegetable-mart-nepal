@@ -29,10 +29,9 @@ export function Navbar() {
 
   const navLinks = [
     { href: "/shop", label: "Shop All" },
-    { href: "/categories/leafy-greens", label: "Categories" },
+    { href: "/categories", label: "Categories" },
     { href: "/shop?sort=newest", label: "New Arrivals" },
     { href: "/shop?sort=popular", label: "Best Sellers" },
-    { href: "/recipes", label: "Recipes" },
   ];
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
