@@ -10,6 +10,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const items = useCart((state) => state.items);
+  const isAuth = useCart((state) => state.isAuth);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -85,7 +86,7 @@ export function Navbar() {
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-6 flex-shrink-0">
-          <Link href={useCart((state) => state.isAuth) ? "/profile" : "/login"} className="text-gray-500 hover:text-green-700 transition-colors">
+          <Link href={isAuth ? "/profile" : "/login"} className="text-gray-500 hover:text-green-700 transition-colors">
             <User className="h-6 w-6" />
             <span className="sr-only">Account</span>
           </Link>
@@ -148,7 +149,7 @@ export function Navbar() {
               </Link>
             ))}
             <div className="h-px bg-gray-100 my-2" />
-            <Link href={useCart((state) => state.isAuth) ? "/profile" : "/login"} onClick={closeMenu} className="flex items-center gap-2 text-base font-bold text-gray-900 hover:text-green-700">
+            <Link href={isAuth ? "/profile" : "/login"} onClick={closeMenu} className="flex items-center gap-2 text-base font-bold text-gray-900 hover:text-green-700">
               <User className="h-5 w-5 text-gray-500" /> Account
             </Link>
           </nav>
