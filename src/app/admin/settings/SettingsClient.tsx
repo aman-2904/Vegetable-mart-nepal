@@ -132,104 +132,98 @@ export default function SettingsClient({ initialSettings, initialDeliveryAreas }
           
           <form onSubmit={handleSettingsSubmit} className={activeTab === 'delivery' ? 'hidden' : 'block'}>
             
-            {activeTab === 'general' && (
-              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-2 mb-4">Basic Information</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Store Name</label>
-                    <input name="store_name" defaultValue={initialSettings?.store_name} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Store Status</label>
-                    <select name="store_status" defaultValue={initialSettings?.store_status} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none">
-                      <option value="open">Open (Accepting Orders)</option>
-                      <option value="closed">Closed (Maintenance)</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Phone</label>
-                    <input name="phone" defaultValue={initialSettings?.phone} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Email</label>
-                    <input name="email" defaultValue={initialSettings?.email} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <label className="text-sm font-medium text-gray-900">Address</label>
-                    <textarea name="address" defaultValue={initialSettings?.address} rows={2} className="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none resize-none" />
-                  </div>
+            <div className={`space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300 ${activeTab === 'general' ? 'block' : 'hidden'}`}>
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-2 mb-4">Basic Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Store Name</label>
+                  <input name="store_name" defaultValue={initialSettings?.store_name} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
                 </div>
-
-                <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-2 mb-4 mt-8">Delivery & Pricing Rules</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Currency</label>
-                    <input name="currency" defaultValue={initialSettings?.currency} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Minimum Order Amount</label>
-                    <input name="minimum_order_amount" type="number" step="0.01" defaultValue={initialSettings?.minimum_order_amount} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Base Delivery Fee</label>
-                    <input name="delivery_fee" type="number" step="0.01" defaultValue={initialSettings?.delivery_fee} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
-                  </div>
-                  <div className="space-y-2 md:col-span-3">
-                    <label className="text-sm font-medium text-gray-900">Free Delivery Threshold (Subtotal)</label>
-                    <input name="free_delivery_threshold" type="number" step="0.01" defaultValue={initialSettings?.free_delivery_threshold} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
-                  </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Store Status</label>
+                  <select name="store_status" defaultValue={initialSettings?.store_status} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none">
+                    <option value="open">Open (Accepting Orders)</option>
+                    <option value="closed">Closed (Maintenance)</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Phone</label>
+                  <input name="phone" defaultValue={initialSettings?.phone} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Email</label>
+                  <input name="email" defaultValue={initialSettings?.email} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-sm font-medium text-gray-900">Address</label>
+                  <textarea name="address" defaultValue={initialSettings?.address} rows={2} className="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none resize-none" />
                 </div>
               </div>
-            )}
 
-            {activeTab === 'payments' && (
-              <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                
-                <div>
-                  <h2 className="text-lg font-bold text-gray-900 mb-2">Cash on Delivery (COD)</h2>
-                  <p className="text-sm text-gray-500 mb-4">Allow customers to pay cash when their order arrives.</p>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input name="cod_enabled" type="checkbox" value="true" defaultChecked={initialSettings?.cod_enabled} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
-                    <span className="text-sm font-medium text-gray-900">Enable COD</span>
-                  </label>
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-2 mb-4 mt-8">Delivery & Pricing Rules</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Currency</label>
+                  <input name="currency" defaultValue={initialSettings?.currency} className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
                 </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Minimum Order Amount</label>
+                  <input name="minimum_order_amount" type="number" step="0.01" defaultValue={initialSettings?.minimum_order_amount} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Base Delivery Fee</label>
+                  <input name="delivery_fee" type="number" step="0.01" defaultValue={initialSettings?.delivery_fee} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
+                </div>
+                <div className="space-y-2 md:col-span-3">
+                  <label className="text-sm font-medium text-gray-900">Free Delivery Threshold (Subtotal)</label>
+                  <input name="free_delivery_threshold" type="number" step="0.01" defaultValue={initialSettings?.free_delivery_threshold} required className="w-full h-11 px-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-600 outline-none" />
+                </div>
+              </div>
+            </div>
 
-                <div className="border-t border-gray-100 pt-8">
-                  <h2 className="text-lg font-bold text-gray-900 mb-2">UPI / QR Payment</h2>
-                  <p className="text-sm text-gray-500 mb-4">Allow customers to pay by scanning your business QR code.</p>
-                  <label className="flex items-center gap-2 cursor-pointer mb-6">
-                    <input name="qr_enabled" type="checkbox" value="true" defaultChecked={initialSettings?.qr_enabled} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
-                    <span className="text-sm font-medium text-gray-900">Enable QR Payments</span>
-                  </label>
+            <div className={`space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300 ${activeTab === 'payments' ? 'block' : 'hidden'}`}>
+              <div>
+                <h2 className="text-lg font-bold text-gray-900 mb-2">Cash on Delivery (COD)</h2>
+                <p className="text-sm text-gray-500 mb-4">Allow customers to pay cash when their order arrives.</p>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input name="cod_enabled" type="checkbox" value="true" defaultChecked={initialSettings?.cod_enabled} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
+                  <span className="text-sm font-medium text-gray-900">Enable COD</span>
+                </label>
+              </div>
 
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Upload Business QR Code</label>
-                    <div className="flex items-start gap-6 mt-2">
-                      <div className="w-32 h-32 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50 overflow-hidden relative shrink-0">
-                        {qrFile ? (
-                          <img src={URL.createObjectURL(qrFile)} alt="Preview" className="w-full h-full object-cover" />
-                        ) : initialSettings?.qr_code_url ? (
-                          <img src={initialSettings.qr_code_url} alt="Current QR" className="w-full h-full object-cover" />
-                        ) : (
-                          <QrCode className="w-8 h-8 text-gray-300" />
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <input 
-                          type="file" 
-                          accept="image/*"
-                          onChange={e => setQrFile(e.target.files?.[0] || null)}
-                          className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                        />
-                        <p className="text-xs text-gray-500 mt-2">Upload your Merchant UPI QR code. Customers will scan this during checkout.</p>
-                      </div>
+              <div className="border-t border-gray-100 pt-8">
+                <h2 className="text-lg font-bold text-gray-900 mb-2">UPI / QR Payment</h2>
+                <p className="text-sm text-gray-500 mb-4">Allow customers to pay by scanning your business QR code.</p>
+                <label className="flex items-center gap-2 cursor-pointer mb-6">
+                  <input name="qr_enabled" type="checkbox" value="true" defaultChecked={initialSettings?.qr_enabled} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
+                  <span className="text-sm font-medium text-gray-900">Enable QR Payments</span>
+                </label>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900">Upload Business QR Code</label>
+                  <div className="flex items-start gap-6 mt-2">
+                    <div className="w-32 h-32 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50 overflow-hidden relative shrink-0">
+                      {qrFile ? (
+                        <img src={URL.createObjectURL(qrFile)} alt="Preview" className="w-full h-full object-cover" />
+                      ) : initialSettings?.qr_code_url ? (
+                        <img src={initialSettings.qr_code_url} alt="Current QR" className="w-full h-full object-cover" />
+                      ) : (
+                        <QrCode className="w-8 h-8 text-gray-300" />
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <input 
+                        type="file" 
+                        accept="image/*"
+                        onChange={e => setQrFile(e.target.files?.[0] || null)}
+                        className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                      />
+                      <p className="text-xs text-gray-500 mt-2">Upload your Merchant UPI QR code. Customers will scan this during checkout.</p>
                     </div>
                   </div>
                 </div>
-
               </div>
-            )}
+            </div>
 
             <div className="mt-8 pt-6 border-t border-gray-100 flex justify-end">
               <button 
